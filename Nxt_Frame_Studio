@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NxtFrame Studio — Professional Video Editing Agency</title>
+<meta name="description" content="NxtFrame Studio is a professional video editing agency for real estate, content creators, podcasts, ads, brands, AI videos and long-form content." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#f5f5f5;
+    --surface:#ffffff;
+    --surface-soft:#f7f6f4;
+    --surface-hover:#f0efec;
+    --line:#ececec;
+    --line-soft:#e5e5e5;
+    --text:#131316;
+    --text-soft:#71757e;
+    --text-muted:#9a9ea6;
+    --accent:#ff5a2b;
+    --accent-2:#ffa03d;
+    --radius-sm:10px;
+    --radius:14px;
+    --radius-lg:18px;
+    --maxw:1240px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 50px}
+
+  /* ============ ANNOUNCEMENT BAR ============ */
+  .announce{
+    background:#000;
+    color:#fff;
+    display:block;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    font-size:clamp(.625rem,2.6vw,.8125rem);
+  }
+  .announce-inner{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;padding:9px 20px;white-space:nowrap;
+  }
+  .announce-cta{
+    background-image:linear-gradient(100deg,#ff5a2b,#ffa03d);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#ffa03d;
+    font-weight:600;display:inline-flex;align-items:center;gap:4px;
+  }
+  .announce-arrow{transition:transform 260ms cubic-bezier(.2,.7,.2,1)}
+  .announce:hover .announce-arrow{transform:translate(3px,-3px)}
+
+  /* ============ NAV ============ */
+  header.nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.86);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;gap:12px;
+    padding:16px 50px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:9px;
+    font-weight:700;font-size:1.05rem;letter-spacing:-.02em;
+    flex-shrink:0;
+  }
+  .logo-mark{
+    width:30px;height:30px;border-radius:9px;
+    background:linear-gradient(135deg,#ff5a2b,#ffa03d);
+    display:grid;place-items:center;
+  }
+  .logo-mark svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2}
+  .logo span{color:var(--text-muted);font-weight:400}
+
+  nav.primary{display:flex;align-items:center;gap:4px;margin-left:8px}
+  nav.primary a{
+    padding:8px 14px;border-radius:9px;
+    font-size:.94rem;color:var(--text);
+    transition:background .18s;
+  }
+  nav.primary a:hover{background:var(--surface-soft)}
+
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 20px;border-radius:100px;
+    font-size:.875rem;font-weight:600;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .18s, box-shadow .18s, background .18s, border-color .18s;
+    white-space:nowrap;font-family:inherit;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg,#ff5a2b,#ffa03d);
+    color:#fff;
+    box-shadow:0 6px 20px rgba(255,90,43,.28);
+  }
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(255,90,43,.38)}
+  .btn-ghost{
+    background:#fff;border-color:var(--line-soft);color:var(--text);
+  }
+  .btn-ghost:hover{background:var(--surface-soft);border-color:#d4d4d4}
+  .btn-dark{
+    background:#131316;color:#fff;
+  }
+  .btn-dark:hover{background:#262626}
+
+  /* ============ HERO ============ */
+  .hero{
+    padding:92px 0 72px;
+    text-align:center;
+    position:relative;
+  }
+  .hero-inner{max-width:820px;margin:0 auto}
+
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:100px;
+    background:#fff;border:1px solid var(--line-soft);
+    font-size:.76rem;font-weight:600;letter-spacing:.02em;
+    color:var(--text-soft);margin-bottom:26px;
+  }
+  .dot{
+    width:7px;height:7px;border-radius:50%;background:#22c55e;
+    box-shadow:0 0 0 3px rgba(34,197,94,.18);
+  }
+
+  h1{
+    font-size:clamp(2.2rem,5.4vw,3.8rem);
+    font-weight:700;letter-spacing:-.035em;line-height:1.08;
+    margin-bottom:22px;color:var(--text);
+  }
+  .grad{
+    background:linear-gradient(100deg,#ff5a2b,#ffa03d);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lede{
+    font-size:clamp(1rem,1.5vw,1.12rem);
+    color:var(--text-soft);max-width:600px;margin:0 auto 34px;
+    font-weight:300;line-height:1.65;
+  }
+  .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* prompt-style box */
+  .hero-prompt{
+    max-width:640px;margin:44px auto 0;
+    background:#fff;border:1px solid var(--line-soft);
+    border-radius:16px;padding:16px 18px;
+    box-shadow:0 20px 48px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+    text-align:left;
+    display:flex;align-items:center;gap:12px;
+  }
+  .hero-prompt .prompt-icon{
+    width:34px;height:34px;border-radius:9px;flex-shrink:0;
+    background:linear-gradient(135deg,#ff5a2b,#ffa03d);
+    display:grid;place-items:center;
+  }
+  .hero-prompt .prompt-icon svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2}
+  .hero-prompt .prompt-text{
+    flex:1;font-size:.92rem;color:var(--text-muted);
+    border-right:1px solid var(--line);
+    padding-right:12px;
+  }
+  .hero-prompt .prompt-send{
+    width:34px;height:34px;border-radius:9px;flex-shrink:0;
+    background:#131316;display:grid;place-items:center;cursor:pointer;
+    transition:background .18s;
+  }
+  .hero-prompt .prompt-send:hover{background:#262626}
+  .hero-prompt .prompt-send svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2}
+
+  /* ============ SECTION HEAD ============ */
+  section{padding:88px 0}
+  .sec-head{max-width:680px;margin:0 auto 52px;text-align:center}
+  .eyebrow{
+    font-size:.74rem;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);
+    margin-bottom:14px;display:block;
+  }
+  h2{
+    font-size:clamp(1.75rem,3.4vw,2.45rem);
+    font-weight:700;letter-spacing:-.03em;line-height:1.16;
+    margin-bottom:16px;
+  }
+  .sec-head p{color:var(--text-soft);font-size:1rem;font-weight:300}
+
+  /* ============ CATEGORY GRID ============ */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:16px;
+  }
+
+  .card{
+    position:relative;
+    display:flex;flex-direction:column;
+    padding:26px 22px 22px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    transition:transform .22s cubic-bezier(.2,.8,.3,1),
+               box-shadow .22s, border-color .22s;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:#e0dfdc;
+    box-shadow:0 18px 40px rgba(0,0,0,.07),0 2px 8px rgba(0,0,0,.04);
+  }
+
+  .card-icon{
+    width:46px;height:46px;border-radius:12px;
+    display:grid;place-items:center;
+    background:var(--surface-soft);
+    border:1px solid var(--line);
+    margin-bottom:18px;
+    transition:background .22s, border-color .22s;
+  }
+  .card:hover .card-icon{
+    background:linear-gradient(135deg,rgba(255,90,43,.10),rgba(255,160,61,.10));
+    border-color:rgba(255,90,43,.25);
+  }
+  .card-icon svg{
+    width:21px;height:21px;
+    stroke:var(--text);fill:none;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+    transition:stroke .22s;
+  }
+  .card:hover .card-icon svg{stroke:var(--accent)}
+
+  .card h3{
+    font-size:1.02rem;font-weight:600;letter-spacing:-.015em;
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:.86rem;color:var(--text-soft);line-height:1.6;
+    flex:1;margin-bottom:16px;font-weight:300;
+  }
+
+  .tags{display:flex;flex-wrap:wrap;gap:5px}
+  .tag{
+    font-size:.67rem;font-weight:500;letter-spacing:.02em;
+    padding:4px 10px;border-radius:100px;
+    background:var(--surface-soft);
+    border:1px solid var(--line);
+    color:var(--text-muted);
+  }
+
+  /* CTA card */
+  .card.cta-card{
+    background:linear-gradient(150deg,#fff6f1,#fffaf5);
+    border-color:#ffe0d1;
+    justify-content:center;align-items:flex-start;
+  }
+  .card.cta-card .card-icon{
+    background:linear-gradient(135deg,#ff5a2b,#ffa03d);
+    border-color:transparent;
+  }
+  .card.cta-card .card-icon svg{stroke:#fff}
+  .card.cta-card p{color:#b0563a}
+  .card.cta-card .link{
+    font-size:.84rem;font-weight:600;color:var(--accent);
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .card.cta-card .link svg{
+    width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;
+    transition:transform .22s;
+  }
+  .card.cta-card:hover .link svg{transform:translateX(3px)}
+
+  /* ============ PROCESS ============ */
+  .process{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  .step{padding:26px 22px;border-left:2px solid var(--line);transition:border-color .25s}
+  .step:hover{border-left-color:var(--accent)}
+  .step-num{
+    font-size:.72rem;font-weight:700;letter-spacing:.1em;
+    color:var(--accent);margin-bottom:12px;display:block;
+  }
+  .step h4{font-size:.98rem;font-weight:600;margin-bottom:7px;letter-spacing:-.01em}
+  .step p{font-size:.84rem;color:var(--text-soft);line-height:1.6;font-weight:300}
+
+  /* ============ CTA BANNER ============ */
+  .cta-banner{
+    position:relative;overflow:hidden;
+    border:1px solid var(--line-soft);
+    border-radius:24px;
+    padding:64px 48px;
+    text-align:center;
+    background:
+      radial-gradient(ellipse 70% 120% at 50% 0%, rgba(255,90,43,.08), transparent 70%),
+      #fff;
+  }
+  .cta-banner h2{margin-bottom:14px}
+  .cta-banner p{color:var(--text-soft);max-width:500px;margin:0 auto 30px;font-weight:300}
+
+  /* ============ FOOTER ============ */
+  footer{
+    border-top:1px solid var(--line);
+    padding:52px 0 34px;
+    margin-top:88px;
+    background:#fff;
+  }
+  .foot-top{
+    display:flex;justify-content:space-between;gap:40px;
+    flex-wrap:wrap;padding-bottom:36px;
+    border-bottom:1px solid var(--line);
+  }
+  .foot-brand{max-width:280px}
+  .foot-brand p{color:var(--text-soft);font-size:.86rem;margin-top:14px;font-weight:300}
+  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-col h5{
+    font-size:.74rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text);margin-bottom:15px;
+  }
+  .foot-col a{
+    display:block;font-size:.86rem;color:var(--text-soft);
+    margin-bottom:9px;transition:color .18s;font-weight:300;
+  }
+  .foot-col a:hover{color:var(--accent)}
+  .foot-bottom{
+    padding-top:24px;display:flex;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+    font-size:.79rem;color:var(--text-muted);font-weight:300;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:1080px){
+    .wrap,.nav-inner{padding-left:32px;padding-right:32px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    nav.primary{display:none}
+  }
+  @media (max-width:640px){
+    .wrap,.nav-inner{padding-left:20px;padding-right:20px}
+    section{padding:64px 0}
+    .hero{padding:64px 0 52px}
+    .grid{grid-template-columns:1fr;gap:14px}
+    .steps{grid-template-columns:1fr}
+    .cta-banner{padding:44px 24px}
+    .foot-cols{gap:36px}
+    .hero-prompt{flex-wrap:wrap}
+    .hero-prompt .prompt-text{border-right:none;padding-right:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= ANNOUNCEMENT ================= -->
+<a href="#contact" class="announce">
+  <span class="announce-inner">
+    <span>Now accepting new video editing projects for Q1</span>
+    <span aria-hidden="true" style="color:rgba(255,255,255,.3)">·</span>
+    <span class="announce-cta">
+      Book a free call
+      <svg class="announce-arrow" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    </span>
+  </span>
+</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16M9 6v12M15 6v12"/></svg>
+      </span>
+      NxtFrame <span>Studio</span>
+    </a>
+    <nav class="primary">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#contact" class="btn btn-ghost">Sign in</a>
+      <a href="#contact" class="btn btn-primary">Book a Call</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="pill"><span class="dot"></span> Accepting new projects</span>
+    <h1>Video editing that makes<br><span class="grad">every frame count.</span></h1>
+    <p class="lede">
+      NxtFrame Studio is a full-service video editing agency. From real estate tours
+      to viral shorts, podcasts to brand films — we turn raw footage into content
+      that performs.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn btn-primary">Explore Services</a>
+      <a href="#work" class="btn btn-ghost">View Our Work</a>
+    </div>
+
+    <div class="hero-prompt">
+      <span class="prompt-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M8 20h8M12 18v2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+      </span>
+      <span class="prompt-text">Describe your project — "Edit my real estate tour into 3 reels"</span>
+      <span class="prompt-send">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What We Edit</span>
+      <h2>Built for every kind of content</h2>
+      <p>Seven specialised editing verticals, one dedicated team. Pick your lane — or mix and match.</p>
+    </div>
+
+    <div class="grid">
+
+      <!-- 1. Real Estate -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.6V21h14V9.6"/><path d="M9.5 21v-6h5v6"/></svg>
+        </div>
+        <h3>Real Estate</h3>
+        <p>Property walkthroughs, listing reels, drone edits and agent branding videos that make buyers stop scrolling.</p>
+        <div class="tags"><span class="tag">Tours</span><span class="tag">Drone</span><span class="tag">Reels</span></div>
+      </article>
+
+      <!-- 2. Content Creators -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+        </div>
+        <h3>Content Creators</h3>
+        <p>YouTube videos, Shorts, Reels and TikToks — retention-focused cuts with hooks, captions and sound design.</p>
+        <div class="tags"><span class="tag">YouTube</span><span class="tag">Shorts</span><span class="tag">Retention</span></div>
+      </article>
+
+      <!-- 3. Podcasts -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21M9 21h6"/></svg>
+        </div>
+        <h3>Podcasts</h3>
+        <p>Multicam switching, audio cleanup, dynamic captions and clip repurposing for every social platform.</p>
+        <div class="tags"><span class="tag">Multicam</span><span class="tag">Clips</span><span class="tag">Audio</span></div>
+      </article>
+
+      <!-- 4. Ads -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 10.5v3a1.5 1.5 0 0 0 1.5 1.5H6l4 4V6.5l-4 4H4.5A1.5 1.5 0 0 0 3 12"/><path d="M15 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
+        </div>
+        <h3>Ads &amp; UGC</h3>
+        <p>Performance creatives built to convert — hook-first structure, motion graphics and platform-ready exports.</p>
+        <div class="tags"><span class="tag">Paid Ads</span><span class="tag">UGC</span><span class="tag">A/B Cuts</span></div>
+      </article>
+
+      <!-- 5. Brands -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2.5 14.4 8.2 20.5 9l-4.6 4.2 1.3 6L12 16.4 6.8 19.2l1.3-6L3.5 9l6.1-.8z"/></svg>
+        </div>
+        <h3>Brands</h3>
+        <p>Brand films, product launches, corporate storytelling and social campaigns with a consistent visual identity.</p>
+        <div class="tags"><span class="tag">Brand Film</span><span class="tag">Launch</span><span class="tag">Social</span></div>
+      </article>
+
+      <!-- 6. AI Videos -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="7.5" y="7.5" width="9" height="9" rx="2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
+        </div>
+        <h3>AI Videos</h3>
+        <p>AI-generated visuals, avatar presenters, voice cloning and faceless content — polished into a real narrative.</p>
+        <div class="tags"><span class="tag">AI Avatars</span><span class="tag">Voiceover</span><span class="tag">Faceless</span></div>
+      </article>
+
+      <!-- 7. Long Videos -->
+      <article class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M7.5 4.5v15M16.5 4.5v15M2.5 9.5h5M16.5 9.5h5M2.5 14.5h5M16.5 14.5h5"/></svg>
+        </div>
+        <h3>Long Videos</h3>
+        <p>Documentaries, courses, event recaps and full-length YouTube edits — paced, structured and story-driven.</p>
+        <div class="tags"><span class="tag">Documentary</span><span class="tag">Courses</span><span class="tag">Events</span></div>
+      </article>
+
+      <!-- 8. CTA card -->
+      <article class="card cta-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h3>Something Else?</h3>
+        <p>Music videos, wedding films, explainers, gaming — if it's video, we can edit it.</p>
+        <a href="#contact" class="link">
+          Start a project
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process" class="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How It Works</span>
+      <h2>A simple, fast workflow</h2>
+      <p>No back-and-forth chaos. Just send your footage and get back content that's ready to publish.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">STEP 01</span>
+        <h4>Send Footage</h4>
+        <p>Upload raw files via Drive, Dropbox or Frame.io with your brief and references.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">STEP 02</span>
+        <h4>We Edit</h4>
+        <p>Your dedicated editor cuts, colours, sound-designs and adds motion graphics.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">STEP 03</span>
+        <h4>Review</h4>
+        <p>Get a first draft with timestamped comments. Unlimited revisions until it's right.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">STEP 04</span>
+        <h4>Deliver</h4>
+        <p>Final files exported in every aspect ratio you need — 16:9, 9:16, 1:1, 4:5.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Ready to level up your content?</h2>
+      <p>Book a free 15-minute call. We'll review your footage and tell you exactly what we'd do with it.</p>
+      <div class="hero-actions">
+        <a href="mailto:hello@nxtframestudio.com" class="btn btn-primary">Book a Free Call</a>
+        <a href="#services" class="btn btn-ghost">See Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 10h16M9 6v12M15 6v12"/></svg>
+          </span>
+          NxtFrame <span>Studio</span>
+        </a>
+        <p>Professional video editing for creators, brands and businesses worldwide.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Services</h5>
+          <a href="#services">Real Estate</a>
+          <a href="#services">Content Creators</a>
+          <a href="#services">Podcasts</a>
+          <a href="#services">Ads &amp; UGC</a>
+        </div>
+        <div class="foot-col">
+          <h5>More</h5>
+          <a href="#services">Brands</a>
+          <a href="#services">AI Videos</a>
+          <a href="#services">Long Videos</a>
+          <a href="#contact">Custom Projects</a>
+        </div>
+        <div class="foot-col">
+          <h5>Company</h5>
+          <a href="#process">Process</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact">Careers</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 NxtFrame Studio. All rights reserved.</span>
+      <span>hello@nxtframestudio.com</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
